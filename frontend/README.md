@@ -1,6 +1,6 @@
 # Frontend for the Secret Santa app
 
-To run the backend locally, simply run the following commands:
+To run the frontend locally, simply run the following commands:
 
 ```
 npm install

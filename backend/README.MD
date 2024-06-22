@@ -8,6 +8,12 @@ python manage.py migrate
 python manage.py runserver
 ```
 
+To run the tests, run the following command:
+
+```
+pytest
+```
+
 Before this project can be deployed to production, the following should be done:
 
 1. Split the settings.py file into local and production settings
