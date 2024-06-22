@@ -8,7 +8,7 @@
       <label class="input-label" for="password">Password: </label>
       <input v-model="password" type="password"/>
     </div>
-    <button class="margin-bottom" type="submit" @click="submit">
+    <button class="margin-bottom" type="submit" @click="login">
       Login
     </button>
     <div class="pointer" @click="navigateToSignup">No account? Signup instead.</div>
@@ -29,7 +29,7 @@ export default {
     };
   },
   methods: {
-    submit() {
+    login() {
       // Send login request and handle authentication token
       login(this.email, this.password).then((response) => {
         // Store the token in local storage
