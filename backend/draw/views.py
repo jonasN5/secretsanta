@@ -1,6 +1,7 @@
 from typing import override
 
 from rest_framework import viewsets, status
+from rest_framework.exceptions import ValidationError
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -44,6 +45,11 @@ class DrawsView(ListAPIView):
         excluded_participants = serializer.validated_data.get('exclude', [])
         participants = Participant.objects.filter(owner=self.request.user).exclude(
             id__in=[p.id for p in excluded_participants])
-        draw: Draw = generate_draw(participants, owner=self.request.user)
-
-        return Response(DrawSerializer(instance=draw).data, status=status.HTTP_201_CREATED)
+        # Need at least 3 participants to create a draw
+        if participants.count() < 3:
+            raise ValidationError('At least 3 participants are required to create a draw')
+        try:
+            draw: Draw = generate_draw(participants, owner=self.request.user)
+            return Response(DrawSerializer(instance=draw).data, status=status.HTTP_201_CREATED)
+        except ValueError:
+            raise ValidationError('No cycle found could be found. The blacklists have to be changed.')

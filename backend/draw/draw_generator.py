@@ -80,6 +80,8 @@ def generate_draw(participants: list[Participant], owner: User) -> Draw:
     :return: a saved Draw instance
     """
     cycle = find_hamiltonian_cycle(list(participants), {p: {b for b in p.blacklisted.all()} for p in participants})
+    if cycle is None:
+        raise ValueError('No Hamiltonian cycle found')
 
     draw = Draw.objects.create(owner=owner)
     # Generate a pair for each vertex in the cycle.
