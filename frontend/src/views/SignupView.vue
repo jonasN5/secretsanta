@@ -1,36 +1,43 @@
 <template>
-  <form @submit.prevent="submit">
-    <div class="margin-bottom">
-      <label class="input-label" for="username">Username: </label>
-      <input v-model="username" type="text"/>
-    </div>
-    <div class="margin-bottom">
-      <label class="input-label" for="email">Email: </label>
-      <input v-model="email" type="email"/>
-    </div>
-    <div class="margin-bottom">
-      <label class="input-label" for="password">Password: </label>
-      <input v-model="password1" type="password"/>
-    </div>
-    <div class="margin-bottom">
-      <label class="input-label" for="password">Repeat Password: </label>
-      <input v-model="password2" type="password"/>
-    </div>
-    <button class="margin-bottom" type="submit" @click="signUp">
-      Signup
-    </button>
-    <div class="pointer" @click="navigateToLogin">Already have an account? Login instead.</div>
+  <div class="centered">
+    <SecretSantaHeader/>
+    <div class="form-container">
+      <form @submit.prevent="submit">
+        <div class="margin-bottom">
+          <label class="input-label" for="username">Username: </label>
+          <input v-model="username" type="text"/>
+        </div>
+        <div class="margin-bottom">
+          <label class="input-label" for="email">Email: </label>
+          <input v-model="email" type="email"/>
+        </div>
+        <div class="margin-bottom">
+          <label class="input-label" for="password">Password: </label>
+          <input v-model="password1" type="password"/>
+        </div>
+        <div class="margin-bottom">
+          <label class="input-label" for="password">Repeat Password: </label>
+          <input v-model="password2" type="password"/>
+        </div>
+        <button class="margin-bottom" type="submit" @click="signUp">
+          Signup
+        </button>
+        <div class="pointer" @click="navigateToLogin">Already have an account? Login instead.</div>
 
 
-  </form>
+      </form>
+    </div>
+  </div>
 </template>
 
 <script>
 
 import {signUp, login} from "@/services/auth.js";
+import SecretSantaHeader from "@/components/SecretSantaHeader.vue";
 
 export default {
   name: 'Signup',
+  components: {SecretSantaHeader},
   data() {
     return {
       username: '',
